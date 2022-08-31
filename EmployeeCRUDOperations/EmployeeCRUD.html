@@ -1,0 +1,104 @@
+<html>
+    <style>
+        body {
+          background-color:lavenderblush;
+        }
+        .button1 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #300352;
+          }
+          
+          .button1:hover {
+            background-color: #300352;
+            color: white;
+          }
+      </style>
+    <body>
+        <h2 style="color:#300352">EMPLOYEE CRUD OPERATIONS</h2>
+        <p>Displaying given employee object</p>
+        <button onclick="displayEmployee()" class="button1">DisplayEmployee</button>
+        <p>Displaying employees array</p>
+        <button onclick="displayEmployeeArray()" class="button1">DisplayEmployeesArray</button><br>
+        <p>Adding an employee to the employees array</p>
+        <button onclick="addEmployee()" class="button1">AddEmployee</button><br>
+        <p>Updating the employee name whose id is 2 (i.e;from Jhon to Suresh)</p>
+        <button onclick="updateEmployee(2)" class="button1">UpdateEmployee</button>
+        <p>Removing an employee at last index of employees array</p>
+        <button onclick="removeEmployeeAtLastIndex()" class="button1">RemoveEmployeeAtLastIndex</button>
+        <p>Removing an employee whose id is 1</p>
+        <button onclick="removeEmployee(1)" class="button1">RemoveEmployeeWithId=1</button>
+        <p>Displaying employee details whose id is 2</p>
+        <button onclick="getEmployeeById(2)" class="button1">EmployeeDetailsWithId=2</button>
+        <P>Sort employees array by id</P>
+        <button onclick="sortById()" class="button1">SortById</button>
+        <P>Sort employees array by name</P>
+        <button onclick="sortByName()" class="button1">SortByName</button>
+        <P>Sort employees array by salary</P>
+        <button onclick="sortBySalary()" class="button1">SortBySalary</button>
+
+        <p id="demo"></p>
+        <script>
+            let employee={id:5,name:"Ramesh",salary:7000};
+            let employees=[ {id:1,name:"Alex",salary:5000},
+                            {id:2,name:"Jhon",salary:3000},
+                            {id:3,name:"Bob",salary:2000} ]
+            function displayEmployee()
+            {
+                document.getElementById("demo").innerHTML=JSON.stringify(employee);
+            }
+            function displayEmployeeArray()
+            {
+                document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+            function addEmployee()
+            {
+                employees.push({id:4,name:"Tom",salary:8000});
+                document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+            function updateEmployee(x)
+            {  
+               objIndex=employees.findIndex(obj => obj.id==x);
+               employees[objIndex].name="Suresh";
+               document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+            function removeEmployeeAtLastIndex()
+            {
+                employees.pop();
+                document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+            function removeEmployee(x)
+            {
+                objIndex=employees.findIndex(obj => obj.id==x);
+                employees.splice(objIndex,1);
+                document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+            function getEmployeeById(x)
+            {
+                objIndex=employees.findIndex(obj => obj.id==x);
+                document.getElementById("demo").innerHTML=JSON.stringify(employees[objIndex]);
+            }
+            function sortById()
+            {
+                employees.sort((a,b)=>{return a.id-b.id;});
+                document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+            function sortByName()
+            {
+                employees.sort((a,b)=>{
+                    let la=a.name.toLowerCase(),lb=b.name.toLowerCase();
+                    if(la<lb){ return -1;}
+                    if(la>lb){ return 1;}
+                    return 0;
+                });
+                document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+            function sortBySalary()
+            {
+                employees.sort((a,b)=>{return a.salary-b.salary;});
+                document.getElementById("demo").innerHTML=JSON.stringify(employees);
+            }
+
+        </script>
+    </body>
+</html>
